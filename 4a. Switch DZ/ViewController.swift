@@ -111,12 +111,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         print ("Ввод числа завершен")
         
-        alert(title: "Ошибка", message: "Вы ввели некоректное значение. Пожалуйста введите данные правильно", style: .alert, funcTextField: textField)
+        alertOne(title: "Ошибка", message: "Вы ввели некоректное значение. Пожалуйста введите данные правильно", style: .alert, funcTextField: textField)
         
         return true
     }
-    
-    func alert(title: String, message: String, style: UIAlertController.Style, funcTextField: UITextField) {
+    // Предуприждение про некоректный ввод.
+    func alertOne(title: String, message: String, style: UIAlertController.Style, funcTextField: UITextField) {
         if Double(funcTextField.text!) == nil {
 
             let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
@@ -131,31 +131,54 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func alertTwo (title: String, message: String, style: UIAlertController.Style) {
+        
+        let alertControl = UIAlertController(title: title, message: message, preferredStyle: style)
+        let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        
+        alertControl.addAction(alertAction)
+        self.present(alertControl, animated: true, completion: nil)
+    }
     
     //Target для SwitchOne
     @objc func switchOneTarget (target: UISwitch) {
         if target == switchOne {
-            if target.isOn {
-                ViewController.avans = ViewController.money * 0.25
-                print(ViewController.avans)
+            if textFieldOne.text != "" {
+                if target.isOn {
+                    ViewController.avans = ViewController.money * 0.25
+                    print(ViewController.avans)
+                }
+            }else if textFieldOne.text == "" {
+                alertTwo(title: "Ошибка", message: "Вы не заполнили обязательное поле. Пожалуйста введите число", style: .alert)
+                switchOne.isOn = false
             }
         }
     }
     //Target для SwitchTwo
     @objc func switchTwoTarget (target: UISwitch) {
         if target == switchTwo {
-            if target.isOn {
-                ViewController.soch = ViewController.money * 0.05
-                print(ViewController.soch)
+            if textFieldOne.text != "" {
+                if target.isOn {
+                    ViewController.soch = ViewController.money * 0.05
+                    print(ViewController.soch)
+                }
+            }else if textFieldOne.text == "" {
+                alertTwo(title: "Ошибка", message: "Вы не заполнили обязательное поле. Пожалуйста введите число", style: .alert)
+                switchTwo.isOn = false
             }
         }
     }
     //Target для SwitchThree
     @objc func switchThreeTarget (target: UISwitch) {
         if target == switchThree {
-            if target.isOn {
-                ViewController.pdv = ViewController.money * 0.10
-                print(ViewController.pdv)
+            if textFieldOne.text != "" {
+                if target.isOn {
+                    ViewController.pdv = ViewController.money * 0.10
+                    print(ViewController.pdv)
+                }
+            }else if textFieldOne.text == "" {
+                alertTwo(title: "Ошибка", message: "Вы не заполнили обязательное поле. Пожалуйста введите число", style: .alert)
+                switchThree.isOn = false
             }
         }
     }

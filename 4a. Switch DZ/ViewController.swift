@@ -67,42 +67,52 @@ class ViewController: UIViewController, UITextFieldDelegate {
         //Отрисовать текст № 2
         self.lableTwo.frame = CGRect(x: 20, y: 360, width: 200, height: 40)
         self.lableTwo.text = "Вычесть аванса - 25%"
-        self.view.addSubview(self.lableTwo)
         
         //Отрисовать switch № 1
         self.switchOne.frame = CGRect(x: 300, y: 365, width: 0, height: 0)
-        self.view.addSubview(self.switchOne)
         self.switchOne.addTarget(self, action: #selector(switchOneTarget(target:)), for: .valueChanged)
         
         //Отрисовать текст № 3
         self.lableThree.frame = CGRect(x: 20, y: 410, width: 200, height: 40)
         self.lableThree.text = "Социальный збор - 5%"
-        self.view.addSubview(self.lableThree)
         
         //Отрисовать switch № 2
         self.switchTwo.frame = CGRect(x: 300, y: 415, width: 0, height: 0)
-        self.view.addSubview(self.switchTwo)
         self.switchTwo.addTarget(self, action: #selector(switchTwoTarget(target:)), for: .valueChanged)
         
         //Отрисовать текст № 4
         self.lableFour.frame = CGRect(x: 20, y: 460, width: 200, height: 40)
         self.lableFour.text = "Подоходный налог - 10%"
-        self.view.addSubview(self.lableFour)
         
         //Отрисовать switch № 3
         self.switchThree.frame = CGRect(x: 300, y: 465, width: 0, height: 0)
-        self.view.addSubview(self.switchThree)
         self.switchThree.addTarget(self, action: #selector(switchThreeTarget(target:)), for: .valueChanged)
         
     }
-
+    
+    func printSwitchAndText () {
+        
+        if Double(textFieldOne.text!) != nil  {
+            self.view.addSubview(self.lableTwo)
+            self.view.addSubview(self.switchOne)
+        
+            self.view.addSubview(self.lableThree)
+            self.view.addSubview(self.switchTwo)
+        
+            self.view.addSubview(self.lableFour)
+            self.view.addSubview(self.switchThree)
+        }
+    }
+    
+    
+    
     
     //Убрать клавиатуру
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print ("textFieldShouldReturn = хотите убрать клавиатуру")
         
         self.textFieldOne.resignFirstResponder()
-        
+        printSwitchAndText()
         print (ViewController.money)
         return true
     }
@@ -131,54 +141,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func alertTwo (title: String, message: String, style: UIAlertController.Style) {
-        
-        let alertControl = UIAlertController(title: title, message: message, preferredStyle: style)
-        let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        
-        alertControl.addAction(alertAction)
-        self.present(alertControl, animated: true, completion: nil)
-    }
-    
     //Target для SwitchOne
     @objc func switchOneTarget (target: UISwitch) {
         if target == switchOne {
-            if textFieldOne.text != "" {
-                if target.isOn {
-                    ViewController.avans = ViewController.money * 0.25
-                    print(ViewController.avans)
-                }
-            }else if textFieldOne.text == "" {
-                alertTwo(title: "Ошибка", message: "Вы не заполнили обязательное поле. Пожалуйста введите число", style: .alert)
-                switchOne.isOn = false
+            if target.isOn {
+                ViewController.avans = ViewController.money * 0.25
+                print(ViewController.avans)
             }
         }
     }
     //Target для SwitchTwo
     @objc func switchTwoTarget (target: UISwitch) {
         if target == switchTwo {
-            if textFieldOne.text != "" {
-                if target.isOn {
-                    ViewController.soch = ViewController.money * 0.05
-                    print(ViewController.soch)
-                }
-            }else if textFieldOne.text == "" {
-                alertTwo(title: "Ошибка", message: "Вы не заполнили обязательное поле. Пожалуйста введите число", style: .alert)
-                switchTwo.isOn = false
+            if target.isOn {
+                ViewController.soch = ViewController.money * 0.05
+                print(ViewController.soch)
             }
         }
     }
     //Target для SwitchThree
     @objc func switchThreeTarget (target: UISwitch) {
         if target == switchThree {
-            if textFieldOne.text != "" {
-                if target.isOn {
-                    ViewController.pdv = ViewController.money * 0.10
-                    print(ViewController.pdv)
-                }
-            }else if textFieldOne.text == "" {
-                alertTwo(title: "Ошибка", message: "Вы не заполнили обязательное поле. Пожалуйста введите число", style: .alert)
-                switchThree.isOn = false
+            if target.isOn {
+                ViewController.pdv = ViewController.money * 0.10
+                print(ViewController.pdv)
             }
         }
     }

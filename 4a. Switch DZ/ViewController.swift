@@ -92,15 +92,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func printSwitchAndText () {
         
-        if Double(textFieldOne.text!) != nil  {
-            self.view.addSubview(self.lableTwo)
-            self.view.addSubview(self.switchOne)
+        if (Double(textFieldOne.text!) != nil) && textFieldOne.text != ""  {
+            self.view.addSubview(lableTwo)
+            self.view.addSubview(switchOne)
         
-            self.view.addSubview(self.lableThree)
-            self.view.addSubview(self.switchTwo)
+            self.view.addSubview(lableThree)
+            self.view.addSubview(switchTwo)
         
-            self.view.addSubview(self.lableFour)
-            self.view.addSubview(self.switchThree)
+            self.view.addSubview(lableFour)
+            self.view.addSubview(switchThree)
         }
     }
     
@@ -175,12 +175,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         self.present(newView, animated: true, completion: nil)
         
+        self.textFieldOne.text = ""
+        
         switchOne.isOn = false
         switchTwo.isOn = false
         switchThree.isOn = false
         
-        
-        
+        for subView in view.subviews {
+            if subView is UISwitch {
+                subView.removeFromSuperview()
+            }
+        }
+        lableTwo.removeFromSuperview()
+        lableThree.removeFromSuperview()
+        lableFour.removeFromSuperview()
     }
     
 }

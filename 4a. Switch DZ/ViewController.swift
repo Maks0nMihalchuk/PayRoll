@@ -103,10 +103,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.view.addSubview(switchThree)
         }
     }
-    
-    
-    
-    
     //Убрать клавиатуру
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print ("textFieldShouldReturn = хотите убрать клавиатуру")

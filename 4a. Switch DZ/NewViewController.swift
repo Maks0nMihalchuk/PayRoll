@@ -29,7 +29,6 @@ class NewViewController: UIViewController {
         print("Это результат", totalLable.text!)
     }
     
-
     @IBAction func goBack(_ sender: Any) {
         ViewController.money = Double()
         dismiss(animated: true, completion: nil)
